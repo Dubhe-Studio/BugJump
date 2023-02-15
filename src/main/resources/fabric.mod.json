@@ -1,0 +1,24 @@
+{
+  "schemaVersion": 1,
+  "id": "bugjump",
+  "version": "${version}",
+  "name": "BugJump",
+  "description": "Help BugJump fix bugs",
+  "authors": [
+    "Gugle"
+  ],
+  "icon": "icon.png",
+  "contact": {},
+  "accessWidener" : "bugjump.accesswidener",
+  "license": "MIT",
+  "environment": "*",
+  "entrypoints": {},
+  "mixins": [
+    "bugjump.mixins.json"
+  ],
+  "depends": {
+    "fabricloader": ">=0.14.9",
+    "fabric": "*",
+    "minecraft": "*"
+  }
+}

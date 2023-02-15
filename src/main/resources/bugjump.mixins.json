@@ -1,0 +1,14 @@
+{
+  "required": true,
+  "minVersion": "0.8",
+  "package": "dev.dubhe.bugjump.mixin",
+  "compatibilityLevel": "JAVA_17",
+  "client": [
+    "FontStorageMixin"
+  ],
+  "injectors": {
+    "defaultRequire": 1
+  },
+  "mixins": [
+  ]
+}
