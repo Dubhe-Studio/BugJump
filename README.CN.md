@@ -1,13 +1,12 @@
 # BugJump
-## [中文](README.CN.md)
+## [English](README.md)
 
-* Help BugJump fix bugs
+* 帮BugJump修BUG
 
-## Functions
+## 功能
 
-* Fixed a crash caused by multiple rendering threads calling fastutil at the same time when too many client modules were
-  installed
-  * for example
+* 修复了安装过多客户端模组时，多个渲染线程同时调用fastutil引起的崩溃
+  * 例如：
     ```
       java.lang.ArrayIndexOutOfBoundsException: Index -1 out of bounds for length 513
           at it.unimi.dsi.fastutil.ints.Int2ObjectOpenHashMap.rehash(Int2ObjectOpenHashMap.java:1334)
