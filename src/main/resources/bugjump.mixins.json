@@ -4,7 +4,8 @@
   "package": "dev.dubhe.bugjump.mixin",
   "compatibilityLevel": "JAVA_17",
   "client": [
-    "FontStorageMixin"
+    "FontStorageMixin",
+    "SplashOverlayMixin"
   ],
   "injectors": {
     "defaultRequire": 1
