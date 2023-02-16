@@ -30,7 +30,7 @@ public abstract class FontStorageMixin {
         cir.setReturnValue(
                 this.glyphCache.computeIfAbsent(codePoint, (codePointx) -> {
                     Glyph glyph = this.getEmptyGlyph(codePointx);
-                    return (Glyph) (glyph == null ? this.getRenderableGlyph(codePointx) : glyph);
+                    return glyph == null ? this.getRenderableGlyph(codePointx) : glyph;
                 })
         );
     }
