@@ -1,5 +1,6 @@
 package dev.dubhe.bugjump.mixin;
 
+import dev.dubhe.bugjump.BugJumpClient;
 import dev.dubhe.bugjump.BugJumpLoadingScreen;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.gui.screen.SplashOverlay;
@@ -36,6 +37,6 @@ public class SplashOverlayMixin {
             locals = LocalCapture.CAPTURE_FAILSOFT)
     private void render(MatrixStack matrices, int mouseX, int mouseY, float delta, CallbackInfo ci,
                         int i, int j, long l, float f) {
-        screen.renderPatches(matrices, delta,f >= 1.0f);
+        if (BugJumpClient.config.bugjumpTitle) screen.renderPatches(matrices, delta, f >= 1.0f);
     }
 }
