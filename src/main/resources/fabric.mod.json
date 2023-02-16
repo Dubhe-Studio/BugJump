@@ -12,7 +12,11 @@
   "accessWidener" : "bugjump.accesswidener",
   "license": "MIT",
   "environment": "*",
-  "entrypoints": {},
+  "entrypoints": {
+    "client": [
+      "dev.dubhe.bugjump.BugJumpClient"
+    ]
+  },
   "mixins": [
     "bugjump.mixins.json"
   ],

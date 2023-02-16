@@ -38,3 +38,7 @@
           at oolloo.jlw.Wrapper.main(Wrapper.java:51)
       ```
  
+## Inspired By
+
+* [Quilt Loading Screen](https://github.com/emmods/quilt_loading_screen)
+* [Mod-erate Loading Screen](https://github.com/enjarai/moderate-loading-screen)
