@@ -36,4 +36,8 @@
           at oolloo.jlw.Wrapper.invokeMain(Wrapper.java:58)
           at oolloo.jlw.Wrapper.main(Wrapper.java:51)
       ```
- 
+
+## 灵感来源
+
+* [Quilt Loading Screen](https://github.com/emmods/quilt_loading_screen)
+* [Mod-erate Loading Screen](https://github.com/enjarai/moderate-loading-screen)
