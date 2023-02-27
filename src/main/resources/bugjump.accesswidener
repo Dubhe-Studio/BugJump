@@ -1,2 +1,4 @@
 accessWidener v1 named
+accessible class net/minecraft/client/font/FontStorage$GlyphPair
+accessible method net/minecraft/client/font/FontStorage$GlyphPair getGlyph (Z)Lnet/minecraft/client/font/Glyph;
 accessible method net/minecraft/client/gui/DrawableHelper drawTexturedQuad (Lnet/minecraft/util/math/Matrix4f;IIIIIFFFF)V

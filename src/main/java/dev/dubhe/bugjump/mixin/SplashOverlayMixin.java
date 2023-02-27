@@ -18,7 +18,7 @@ import java.util.Optional;
 import java.util.function.Consumer;
 
 @Mixin(SplashOverlay.class)
-public class SplashOverlayMixin {
+public abstract class SplashOverlayMixin {
     @Shadow
     @Final
     private MinecraftClient client;
