@@ -22,7 +22,10 @@ public abstract class FontStorageMixin {
     @Inject(method = "getGlyph", at = @At("HEAD"), cancellable = true)
     private synchronized void getGlyph(int codePoint, boolean validateAdvance, CallbackInfoReturnable<Glyph> cir) {
         cir.setReturnValue(
-                this.glyphCache.computeIfAbsent(codePoint, this::findGlyph).getGlyph(validateAdvance)
+                this.glyphCache.computeIfAbsent(codePoint, (codePointx) -> {
+                    Glyph glyph = this.getEmptyGlyph(codePointx);
+                    return glyph == null ? this.getRenderableGlyph(codePointx) : glyph;
+                })
         );
     }
 }

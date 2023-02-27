@@ -27,18 +27,18 @@ public class BugJumpCommand {
         if (!BugJumpClient.CONFIG_FILE.isFile()) {
             try (FileWriter writer = new FileWriter(BugJumpClient.CONFIG_FILE)) {
                 GSON.toJson(BugJumpClient.config, writer);
-                context.getSource().sendMessage(Text.of("BugJump's Config is reloaded").getWithStyle(Style.EMPTY.withColor(Formatting.GREEN)).get(0));
+                context.getSource().sendFeedback(Text.of("BugJump's Config is reloaded").getWithStyle(Style.EMPTY.withColor(Formatting.GREEN)).get(0), false);
             } catch (IOException e) {
                 e.printStackTrace();
-                context.getSource().sendMessage(Text.of("BugJump's Config is reload failed").getWithStyle(Style.EMPTY.withColor(Formatting.RED)).get(0));
+                context.getSource().sendFeedback(Text.of("BugJump's Config is reload failed").getWithStyle(Style.EMPTY.withColor(Formatting.RED)).get(0), false);
             }
         } else {
             try (FileReader reader = new FileReader(BugJumpClient.CONFIG_FILE)) {
                 BugJumpClient.config = GSON.fromJson(reader, BugJumpClient.BugJumpConfig.class);
-                context.getSource().sendMessage(Text.of("BugJump's Config is reloaded").getWithStyle(Style.EMPTY.withColor(Formatting.GREEN)).get(0));
+                context.getSource().sendFeedback(Text.of("BugJump's Config is reloaded").getWithStyle(Style.EMPTY.withColor(Formatting.GREEN)).get(0), false);
             } catch (IOException e) {
                 e.printStackTrace();
-                context.getSource().sendMessage(Text.of("BugJump's Config is reload failed").getWithStyle(Style.EMPTY.withColor(Formatting.RED)).get(0));
+                context.getSource().sendFeedback(Text.of("BugJump's Config is reload failed").getWithStyle(Style.EMPTY.withColor(Formatting.RED)).get(0), false);
             }
         }
         return 0;
