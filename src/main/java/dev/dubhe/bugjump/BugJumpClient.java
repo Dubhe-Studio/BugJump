@@ -36,6 +36,6 @@ public class BugJumpClient implements ClientModInitializer {
 
     public static final class BugJumpConfig {
         @SerializedName("bugjump_title")
-        public boolean bugjumpTitle = true;
+        public boolean bugjumpTitle = false;
     }
 }
