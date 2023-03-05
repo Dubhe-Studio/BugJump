@@ -17,7 +17,7 @@ public abstract class CommandManagerMixin {
     @Final
     private CommandDispatcher<ServerCommandSource> dispatcher;
 
-    @Inject(method = "<init>", at = @At(value = "INVOKE", target = "Lcom/mojang/brigadier/CommandDispatcher;setConsumer(Lcom/mojang/brigadier/ResultConsumer;)V"))
+    @Inject(method = "<init>", at = @At(value = "INVOKE", target = "Lcom/mojang/brigadier/CommandDispatcher;findAmbiguities(Lcom/mojang/brigadier/AmbiguityConsumer;)V"))
     private void register(CommandManager.RegistrationEnvironment environment, CallbackInfo ci) {
         BugJumpCommand.register(this.dispatcher);
     }

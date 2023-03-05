@@ -12,6 +12,8 @@
     "defaultRequire": 1
   },
   "mixins": [
-    "AttributeContainerMixin"
+    "AttributeContainerMixin",
+    "PacketByteBufMixin",
+    "PacketInflaterMixin"
   ]
 }
