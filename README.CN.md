@@ -36,6 +36,8 @@
           at oolloo.jlw.Wrapper.invokeMain(Wrapper.java:58)
           at oolloo.jlw.Wrapper.main(Wrapper.java:51)
       ```
+    
+* 把NBT数据包大小限制从2MB增加到2GB
 
 ## 灵感来源
 

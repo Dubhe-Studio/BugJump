@@ -3,7 +3,7 @@
 
 * Help BugJump fix bugs
 
-## Functions
+## Features
 
 * Fixed a crash caused by multiple rendering threads calling fastutil at the same time when too many client modules were
   installed
@@ -37,6 +37,8 @@
           at oolloo.jlw.Wrapper.invokeMain(Wrapper.java:58)
           at oolloo.jlw.Wrapper.main(Wrapper.java:51)
       ```
+    
+* Raising the packet size limit from 2MB to 2GB
  
 ## Inspired By
 
