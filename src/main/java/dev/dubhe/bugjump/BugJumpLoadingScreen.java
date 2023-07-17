@@ -1,14 +1,14 @@
 package dev.dubhe.bugjump;
 
+import com.mojang.blaze3d.platform.NativeImage;
 import com.mojang.blaze3d.systems.RenderSystem;
+import com.mojang.blaze3d.vertex.PoseStack;
 import net.fabricmc.loader.api.FabricLoader;
 import net.fabricmc.loader.api.ModContainer;
-import net.minecraft.client.MinecraftClient;
-import net.minecraft.client.gui.DrawableHelper;
-import net.minecraft.client.texture.NativeImage;
-import net.minecraft.client.texture.NativeImageBackedTexture;
-import net.minecraft.client.util.math.MatrixStack;
-import net.minecraft.util.Identifier;
+import net.minecraft.client.Minecraft;
+import net.minecraft.client.gui.GuiGraphics;
+import net.minecraft.client.renderer.texture.DynamicTexture;
+import net.minecraft.resources.ResourceLocation;
 import org.apache.commons.lang3.Validate;
 
 import java.io.InputStream;
@@ -20,35 +20,34 @@ import java.util.Random;
 
 public class BugJumpLoadingScreen {
     public static final String MODID = "bugjump";
-    private final MinecraftClient client;
+    private final Minecraft client;
     private final int patchSize;
-    private final Identifier texture;
+    private final ResourceLocation texture;
 
     private final Random random = new Random();
     private final ArrayList<FallingPatch> fallingPatches = new ArrayList<>();
 
     private float patchTimer = 0f;
 
-    public BugJumpLoadingScreen(MinecraftClient client) {
+    public BugJumpLoadingScreen(Minecraft client) {
         this.client = client;
         this.patchSize = 64;
         ModContainer mod = FabricLoader.getInstance().getModContainer("bugjump").get();
         String path = mod.getMetadata().getIconPath(512).get();
-        NativeImageBackedTexture texture = getIconTexture(mod, path);
-        this.texture = new Identifier(MODID, mod.getMetadata().getId() + "_icon");
-        MinecraftClient.getInstance().getTextureManager().registerTexture(this.texture, texture);
+        DynamicTexture texture = getIconTexture(mod, path);
+        this.texture = new ResourceLocation(MODID, mod.getMetadata().getId() + "_icon");
+        Minecraft.getInstance().getTextureManager().register(this.texture, texture);
         createPatch();
     }
 
 
-
-    private static NativeImageBackedTexture getIconTexture(ModContainer iconSource, String iconPath) {
+    private static DynamicTexture getIconTexture(ModContainer iconSource, String iconPath) {
         try {
             Path path = iconSource.getPath(iconPath);
             try (InputStream inputStream = Files.newInputStream(path)) {
                 NativeImage image = NativeImage.read(Objects.requireNonNull(inputStream));
                 Validate.validState(image.getHeight() == image.getWidth(), "Must be square icon");
-                return new NativeImageBackedTexture(image);
+                return new DynamicTexture(image);
             }
 
         } catch (Throwable t) {
@@ -58,7 +57,7 @@ public class BugJumpLoadingScreen {
 
     public void createPatch() {
         fallingPatches.add(new FallingPatch(
-                random.nextDouble() * this.client.getWindow().getScaledWidth(), -patchSize,
+                random.nextDouble() * this.client.getWindow().getGuiScaledWidth(), -patchSize,
                 (random.nextDouble() - 0.5) * 0.6,
                 random.nextDouble() * 3.0 + 1.0,
                 random.nextDouble() / 2 + 0.5,
@@ -83,7 +82,7 @@ public class BugJumpLoadingScreen {
         }
     }
 
-    public void renderPatches(MatrixStack matrices, float delta, boolean ending) {
+    public void renderPatches(GuiGraphics guiGraphics, float delta, boolean ending) {
         if (delta < 2.0f)
             updatePatches(delta, ending);
 
@@ -93,7 +92,7 @@ public class BugJumpLoadingScreen {
         RenderSystem.defaultBlendFunc();
 
         for (FallingPatch patch : fallingPatches) {
-            patch.render(matrices);
+            patch.render(guiGraphics);
         }
     }
 
@@ -125,8 +124,9 @@ public class BugJumpLoadingScreen {
             y += fallSpeed * delta;
         }
 
-        public void render(MatrixStack matrices) {
-            matrices.push();
+        public void render(GuiGraphics guiGraphics) {
+            PoseStack matrices = guiGraphics.pose();
+            matrices.pushPose();
             matrices.translate(x, y, 0);
 
             matrices.scale((float) scale, (float) scale, (float) scale);
@@ -136,13 +136,14 @@ public class BugJumpLoadingScreen {
             double x2 = patchSize / 2d;
             double y2 = patchSize / 2d;
 
-            DrawableHelper.drawTexturedQuad(
-                    matrices.peek().getPositionMatrix(),
+            ModContainer mod = FabricLoader.getInstance().getModContainer("bugjump").get();
+            guiGraphics.innerBlit(
+                    new ResourceLocation(MODID, mod.getMetadata().getId() + "_icon"),
                     (int) x1, (int) x2, (int) y1, (int) y2, 0,
                     0.0f, 1.0f, 0.0f, 1.0f
             );
 
-            matrices.pop();
+            matrices.popPose();
         }
     }
 }
